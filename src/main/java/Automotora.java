@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Automotora {
     private List<Vehiculo> vehiculosAVenta;
@@ -27,15 +28,15 @@ public class Automotora {
     }
 
     public void añadirVehiculosPorVender(){
-        this.vehiculosAVenta.add(new Vehiculo("Celerio","Gris","Suzuki",
+        this.vehiculosAVenta.add(new Vehiculo("Celerio",ColorVehiculo.GRIS,MarcaVehiculo.SUZUKI,
                 2018,5000000,40000.4));
-        this.vehiculosAVenta.add(new Vehiculo("Hilux","Rojo","Toyota",
+        this.vehiculosAVenta.add(new Vehiculo("Hilux",ColorVehiculo.ROJO,MarcaVehiculo.TOYOTA,
                 2020,12000000,1000));
-        this.vehiculosAVenta.add(new Vehiculo("Qashqai","Blanco","Nissan",
+        this.vehiculosAVenta.add(new Vehiculo("Qashqai",ColorVehiculo.BLANCO,MarcaVehiculo.NISSAN,
                 2018,10590000,20000.23));
-        this.vehiculosAVenta.add(new Vehiculo("Cruze","Celeste","Chevrolet",
+        this.vehiculosAVenta.add(new Vehiculo("Cruze",ColorVehiculo.CELESTE,MarcaVehiculo.CHEVROLET,
                 2010,4500000,105000.144));
-        this.vehiculosAVenta.add(new Vehiculo("Sail","Gris","Chevrolet",
+        this.vehiculosAVenta.add(new Vehiculo("Sail",ColorVehiculo.GRIS,MarcaVehiculo.CHEVROLET,
                 2020,6000000,0));
     }
 
@@ -162,6 +163,16 @@ public class Automotora {
             }
         }
         return buscarCliente;
+    }
+
+    public void modificarClientes(Cliente cliente){
+        Scanner teclado = new Scanner(System.in);
+        String direccion = teclado.next();
+        String correo = teclado.next();
+        int numero = teclado.nextInt();
+        cliente.setDireccion(direccion);
+        cliente.setCorreo(correo);
+        cliente.setNumeroTelefono(numero);
     }
 
     public void eliminarClientes(Cliente cliente){

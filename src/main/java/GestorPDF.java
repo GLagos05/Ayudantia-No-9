@@ -52,7 +52,7 @@ public class GestorPDF {
         System.out.println(fecha.toString());
         String fechaArchivo= fecha.toString();
         fechaArchivo=fechaArchivo.replace(" ","").replace(":","");
-        String nombreArchivo="C:\\Users\\corre\\Desktop/"+"boleta"+fechaArchivo+".pdf";
+        String nombreArchivo="target/"+"boleta"+fechaArchivo+".pdf";
         return nombreArchivo;
     }
 }

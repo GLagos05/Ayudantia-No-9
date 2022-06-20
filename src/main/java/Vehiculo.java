@@ -1,9 +1,11 @@
 public class Vehiculo {
-    private String nombre, color, marca;
+    private String nombre;
+    ColorVehiculo color;
+    MarcaVehiculo marca;
     private int año, precio;
     private double kmRecorridos, cantidadCombustible;
 
-    public Vehiculo(String nombre, String color, String marca, int año, int precio, double kmRecorridos){
+    public Vehiculo(String nombre, ColorVehiculo color, MarcaVehiculo marca, int año, int precio, double kmRecorridos){
         this.nombre=nombre;
         this.color=color;
         this.marca=marca;
@@ -21,19 +23,19 @@ public class Vehiculo {
         this.nombre = nombre;
     }
 
-    public String getColor() {
+    public ColorVehiculo getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(ColorVehiculo color) {
         this.color = color;
     }
 
-    public String getMarca() {
+    public MarcaVehiculo getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public void setMarca(MarcaVehiculo marca) {
         this.marca = marca;
     }
 
@@ -68,13 +70,28 @@ public class Vehiculo {
     public void setKmRecorridos(double kmRecorridos) {
         this.kmRecorridos = kmRecorridos;
     }
+
     public void arrancarVehiculo(){
     //método para arrancar vehiculo
     }
+
     public void detenerVehiculo(){
     //método para detener vehiculo
     }
+
     public void rellenarCombustible(double cantCombustible){
         this.cantidadCombustible+= cantCombustible;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "nombre='" + nombre + '\'' +
+                ", color=" + color +
+                ", marca=" + marca +
+                ", año=" + año +
+                ", precio=" + precio +
+                ", kmRecorridos=" + kmRecorridos +
+                '}';
     }
 }
