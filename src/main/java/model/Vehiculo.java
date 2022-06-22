@@ -1,3 +1,5 @@
+package model;
+
 public class Vehiculo {
     private String nombre;
     ColorVehiculo color;
@@ -85,13 +87,6 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
-                "nombre='" + nombre + '\'' +
-                ", color=" + color +
-                ", marca=" + marca +
-                ", año=" + año +
-                ", precio=" + precio +
-                ", kmRecorridos=" + kmRecorridos +
-                '}';
+        return nombre + ',' + color + "," + marca + "," + año + "," + precio + "," + kmRecorridos;
     }
 }

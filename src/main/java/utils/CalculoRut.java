@@ -1,3 +1,5 @@
+package utils;
+
 public class CalculoRut {
     public static void main(String[] args) {
         menu();

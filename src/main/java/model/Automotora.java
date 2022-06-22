@@ -1,8 +1,13 @@
+package model;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import data.GestorDatos;
+import utils.CalculoRut;
+import utils.GestorPDF;
 
 public class Automotora {
     private List<Vehiculo> vehiculosAVenta;
@@ -111,24 +116,24 @@ public class Automotora {
         }
     }
 
-    public Vendedor buscarVendedorNombre(String nombre){
-        Vendedor buscarVendedor = null;
+    public List<Vendedor> buscarVendedorNombre(String nombre){
+        List<Vendedor> vendedores = new ArrayList<Vendedor>();
         for (Vendedor vendedor : this.vendedores) {
             if (vendedor.getNombre().equals(nombre)) {
-                buscarVendedor = vendedor;
+                vendedores.add(vendedor);
             }
         }
-        return buscarVendedor;
+        return vendedores;
     }
 
-    public Vendedor buscarVendedorRut(String rut){
-        Vendedor buscarVendedor = null;
+    public List<Vendedor> buscarVendedorRut(String rut){
+        List<Vendedor> vendedores = new ArrayList<Vendedor>();
         for (Vendedor vendedor : this.vendedores) {
             if (vendedor.getRut().equals(rut)) {
-                buscarVendedor = vendedor;
+                vendedores.add(vendedor);
             }
         }
-        return buscarVendedor;
+        return vendedores;
     }
 
     public List<Cliente> getClientes() {
@@ -137,7 +142,7 @@ public class Automotora {
 
     public void añadirClientes(){
         CalculoRut calculoRut = new CalculoRut();
-        Cliente cliente = new Cliente("Pedrito","14503774-3","casa","correo@gmail,com",123456789);
+        Cliente cliente = new Cliente("Cliente","12345678-9","casa","cliente@cliente.cl",123456789);
         if (CalculoRut.verificarRut(cliente.getRut())){
             this.clientes.add(cliente);
         }else{
@@ -145,24 +150,24 @@ public class Automotora {
         }
     }
 
-    public Cliente buscarClienteNombre(String nombre){
-        Cliente buscarCliente = null;
+    public List<Cliente> buscarClienteNombre(String nombre){ //arraylist
+        List<Cliente> clientes = new ArrayList<Cliente>();
         for (Cliente cliente : this.clientes) {
             if (cliente.getNombre().equals(nombre)) {
-                buscarCliente = cliente;
+                clientes.add(cliente);
             }
         }
-        return buscarCliente;
+        return clientes;
     }
 
-    public Cliente buscarClienteRut(String rut){
-        Cliente buscarCliente = null;
+    public List<Cliente> buscarClienteRut(String rut){
+        List<Cliente> clientes = new ArrayList<Cliente>();
         for (Cliente cliente : this.clientes) {
             if (cliente.getNombre().equals(rut)) {
-                buscarCliente = cliente;
+                clientes.add(cliente);
             }
         }
-        return buscarCliente;
+        return clientes;
     }
 
     public void modificarClientes(Cliente cliente){
@@ -179,24 +184,14 @@ public class Automotora {
         this.clientes.remove(cliente);
     }
 
-    public Vehiculo buscarAutoNombreVenta(String nombre){
-        Vehiculo buscarVehiculo = null;
-        for(Vehiculo auto : this.vehiculosAVenta){
-            if(auto.getNombre().equals(nombre)){
-                buscarVehiculo = auto;
-            }
-        }
-        return buscarVehiculo;
-    }
-
     public List<Venta> getVentas() {
         return ventas;
     }
 
-    public void añadirVenta(){
-        Vendedor vendedor = buscarVendedorNombre("German");
-        Cliente cliente = buscarClienteNombre("Pedrito");
-        Vehiculo vehiculo = buscarAutoNombreVenta("Celerio");
+    public void añadirVenta(String nombreCliente){
+        Vendedor vendedor = buscarVendedorNombre("German").get(0);
+        Cliente cliente = buscarClienteNombre(nombreCliente).get(0);
+        Vehiculo vehiculo = buscarAutoNombre("Celerio").get(0);
         Date fecha = new Date();
         Venta venta = new Venta(vendedor, cliente, vehiculo, fecha);
         this.ventas.add(venta);
@@ -216,7 +211,14 @@ public class Automotora {
         añadirVendedores();
         añadirClientes();
         añadirVehiculosPorVender();
-        añadirVenta();
+        añadirVenta("Cliente");
+        cargaMasivaDatos(buscarClienteNombre("Cliente"),buscarAutoNombre("Celerio"),buscarVendedorNombre("German"));
+    }
+
+    public void cargaMasivaDatos(List<Cliente> clientes, List<Vehiculo> vehiculos, List<Vendedor> vendedores){
+        GestorDatos.registrarDato(clientes.get(0),"target/"+"clientes.txt");
+        GestorDatos.registrarDato(vehiculos.get(0),"target/"+"vehiculos.txt");
+        GestorDatos.registrarDato(vendedores.get(0),"target/"+"vendedores.txt");
     }
 
 }
