@@ -3,9 +3,9 @@ package model;
 public class Cliente extends Persona{
     private String direccion;
     private String correo;
-    private int numeroTelefono;
+    private String numeroTelefono;
 
-    public Cliente(String nombre, String rut, String direccion, String correo, int numeroTelefono) {
+    public Cliente(String nombre, String rut, String direccion, String correo, String numeroTelefono) {
         super(nombre, rut);
         this.direccion = direccion;
         this.correo = correo;
@@ -28,16 +28,21 @@ public class Cliente extends Persona{
         this.correo = correo;
     }
 
-    public int getNumeroTelefono() {
+    public String getNumeroTelefono() {
         return numeroTelefono;
     }
 
-    public void setNumeroTelefono(int numeroTelefono) {
+    public void setNumeroTelefono(String numeroTelefono) {
         this.numeroTelefono = numeroTelefono;
     }
 
     @Override
     public String toString() {
         return nombre + ',' + rut + ',' + direccion + ',' + correo + ',' + numeroTelefono;
+    }
+
+    @Override
+    public void obtenerDescuento() {
+        System.out.println("Usted tiene un descuento de un 20%");
     }
 }

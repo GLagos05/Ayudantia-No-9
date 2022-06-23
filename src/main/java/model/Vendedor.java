@@ -20,4 +20,9 @@ public class Vendedor extends Persona{
     public String toString() {
         return nombre + ',' + rut + ',' + edad;
     }
+
+    @Override
+    public void obtenerDescuento() {
+        System.out.println("Usted tiene un descuento de un 10%");
+    }
 }

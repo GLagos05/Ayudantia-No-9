@@ -142,7 +142,7 @@ public class Automotora {
 
     public void añadirClientes(){
         CalculoRut calculoRut = new CalculoRut();
-        Cliente cliente = new Cliente("Cliente","12345678-9","casa","cliente@cliente.cl",123456789);
+        Cliente cliente = new Cliente("Cliente","12345678-9","casa","cliente@cliente.cl","123456789");
         if (CalculoRut.verificarRut(cliente.getRut())){
             this.clientes.add(cliente);
         }else{
@@ -174,7 +174,7 @@ public class Automotora {
         Scanner teclado = new Scanner(System.in);
         String direccion = teclado.next();
         String correo = teclado.next();
-        int numero = teclado.nextInt();
+        String numero = teclado.next();
         cliente.setDireccion(direccion);
         cliente.setCorreo(correo);
         cliente.setNumeroTelefono(numero);
@@ -188,13 +188,14 @@ public class Automotora {
         return ventas;
     }
 
-    public void añadirVenta(String nombreCliente){
+    public void añadirVenta(String nombreCliente, String nombreAuto){
         Vendedor vendedor = buscarVendedorNombre("German").get(0);
         Cliente cliente = buscarClienteNombre(nombreCliente).get(0);
-        Vehiculo vehiculo = buscarAutoNombre("Celerio").get(0);
+        Vehiculo vehiculo = buscarAutoNombre(nombreAuto).get(0);
         Date fecha = new Date();
         Venta venta = new Venta(vendedor, cliente, vehiculo, fecha);
         this.ventas.add(venta);
+        venderAuto(nombreAuto,vehiculo.getAño());
         boletaVenta(venta);
     }
 
@@ -211,14 +212,15 @@ public class Automotora {
         añadirVendedores();
         añadirClientes();
         añadirVehiculosPorVender();
-        añadirVenta("Cliente");
-        cargaMasivaDatos(buscarClienteNombre("Cliente"),buscarAutoNombre("Celerio"),buscarVendedorNombre("German"));
+        añadirVenta("Cliente", "Celerio");
+        añadirVenta("Cliente", "Hilux");
+        cargaMasivaDatos(this.clientes,this.vehiculosVendidos,this.vendedores);
     }
 
     public void cargaMasivaDatos(List<Cliente> clientes, List<Vehiculo> vehiculos, List<Vendedor> vendedores){
-        GestorDatos.registrarDato(clientes.get(0),"target/"+"clientes.txt");
-        GestorDatos.registrarDato(vehiculos.get(0),"target/"+"vehiculos.txt");
-        GestorDatos.registrarDato(vendedores.get(0),"target/"+"vendedores.txt");
+        GestorDatos.registrarDatos(clientes,"target/"+"clientes.txt");
+        GestorDatos.registrarDatos(vehiculos,"target/"+"vehiculos.txt");
+        GestorDatos.registrarDatos(vendedores,"target/"+"vendedores.txt");
     }
 
 }
